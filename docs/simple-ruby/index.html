@@ -1,61 +1,272 @@
-<!DOCTYPE html>
-<html lang=en>
-  <head>
-    <meta charset='utf-8'>
-    <title>Ruby and Accessibility</title>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
-    <script class='remove'>
-      var respecConfig = {
-        specStatus: "ED",
-        editors: [{
-          name: "Florian Rivoal",
-	  company: "Invited Expert",
-          url: "https://florian.rivoal.net",
-	  w3cid: "43241",
-        }],
-        authors: [{
-            name: "Toshi Kobayashi",
-          }],
-        github: "w3c/jlreq",
-	edDraftURI: "https://w3c.github.io/jlreq/docs/simple-ruby/",
-        prevED: "https://florian.rivoal.net/ruby/",
-        shortName: "ruby-accessibility",
-        alternateFormats: [{
-            uri: "ruby-rules-ja.pdf",
-            label: "Original Japanese (PDF)",
-        }],
-        localBiblio: {
-          JIS4051: {
-            title: "Formatting rules for Japanese documents (&#12302;&#26085;&#26412;&#35486;&#25991;&#26360;&#12398;&#32068;&#29256;&#26041;&#27861;&#12303;)",
-            publisher: "Japanese Standards Association",
-            date: "2004",
-            id: "JIS X 4051:2004",
-          },
-        },
-        noRecTrack: true,
-        wg: "Internationalization Working Group",
-      };
-    </script>
-    <style>
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="generator" content="ReSpec 26.8.4">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+.issue-label{text-transform:initial}
+.warning>p:first-child{margin-top:0}
+.warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
+span.warning{padding:.1em .5em .15em}
+.issue.closed span.issue-number{text-decoration:line-through}
+.warning{border-color:#f11;border-width:.2em;border-style:solid;background:#fbe9e9}
+.warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
+li.task-list-item{list-style:none}
+input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
+.issue a.respec-gh-label{padding:5px;margin:0 2px 0 2px;font-size:10px;text-transform:none;text-decoration:none;font-weight:700;border-radius:4px;position:relative;bottom:2px;border:none;display:inline-block}
+</style>
+<style>
+dfn{cursor:pointer}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font:small Helvetica Neue,sans-serif,Droid Sans Fallback;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
+.dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1}
+.dfn-panel *{margin:0}
+.dfn-panel b{display:block;color:#000;margin-top:.25em}
+.dfn-panel ul a[href]{color:#333}
+.dfn-panel>div{display:flex}
+.dfn-panel a.self-link{font-weight:700;margin-right:auto}
+.dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
+.dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
+.dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+.dfn-panel a[href]:hover{border-bottom-width:1px}
+.dfn-panel ul{padding:0}
+.dfn-panel li{margin-left:1em}
+.dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+</style>
+    
+    
+<title>Ruby and Accessibility</title>
+    
+    
+    
+<style>
+
       .note figure img {
         background: white;
         padding: 0.5em;
       }
-    </style>
-  </head>
-<body>
-<section id='abstract'>
+    
+</style>
+  
+<style id="respec-mainstyle">
+@keyframes pop{
+0%{transform:scale(1,1)}
+25%{transform:scale(1.25,1.25);opacity:.75}
+100%{transform:scale(1,1)}
+}
+.hljs{background:0 0!important}
+a abbr,h1 abbr,h2 abbr,h3 abbr,h4 abbr,h5 abbr,h6 abbr{border:none}
+dfn{font-weight:700}
+a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+a.bibref{text-decoration:none}
+.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+@supports not (text-decoration:red wavy underline){
+.respec-offending-element:not(pre){display:inline-block}
+.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+}
+#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+cite .bibref{font-style:normal}
+code{color:#c63501}
+th code{color:inherit}
+a[href].orcid{padding-left:4px;padding-right:4px}
+a[href].orcid>svg{margin-bottom:-2px}
+.toc a,.tof a{text-decoration:none}
+a .figno,a .secno{color:#000}
+ol.tof,ul.tof{list-style:none outside none}
+.caption{margin-top:.5em;font-style:italic}
+table.simple{border-spacing:0;border-collapse:collapse;border-bottom:3px solid #005a9c}
+.simple th{background:#005a9c;color:#fff;padding:3px 5px;text-align:left}
+.simple th a{color:#fff;padding:3px 5px;text-align:left}
+.simple th[scope=row]{background:inherit;color:inherit;border-top:1px solid #ddd}
+.simple td{padding:3px 10px;border-top:1px solid #ddd}
+.simple tr:nth-child(even){background:#f0f6ff}
+.section dd>p:first-child{margin-top:0}
+.section dd>p:last-child{margin-bottom:0}
+.section dd{margin-bottom:1em}
+.section dl.attrs dd,.section dl.eldef dd{margin-bottom:0}
+#issue-summary>ul{column-count:2}
+#issue-summary li{list-style:none;display:inline-block}
+details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+details.respec-tests-details>*{padding-right:2em}
+details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+details.respec-tests-details>li{padding-left:1em}
+a[href].self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+h2,h3,h4,h5,h6{position:relative}
+aside.example .marker>a.self-link{color:inherit}
+h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{border:none;color:inherit;font-size:83%;height:2em;left:-1.6em;opacity:.5;position:absolute;text-align:center;text-decoration:none;top:0;transition:opacity .2s;width:2em}
+h2>a.self-link::before,h3>a.self-link::before,h4>a.self-link::before,h5>a.self-link::before,h6>a.self-link::before{content:"§";display:block}
+@media (max-width:767px){
+dd{margin-left:0}
+h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{left:auto;top:auto}
+}
+@media print{
+.removeOnSave{display:none}
+}
+</style>
+<meta name="description" content="Placeholder for information about ruby accessibility.">
+<link rel="canonical" href="https://www.w3.org/TR/ruby-accessibility/">
+<style>
+var{position:relative;cursor:pointer}
+var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
+var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#000}
+var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#000;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
+</style>
+<script id="initialUserConfig" type="application/json">{
+  "specStatus": "ED",
+  "editors": [
+    {
+      "name": "Florian Rivoal",
+      "company": "Invited Expert",
+      "url": "https://florian.rivoal.net",
+      "w3cid": "43241"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Toshi Kobayashi"
+    }
+  ],
+  "github": "w3c/jlreq",
+  "edDraftURI": "https://w3c.github.io/jlreq/docs/simple-ruby/",
+  "prevED": "https://florian.rivoal.net/ruby/",
+  "shortName": "ruby-accessibility",
+  "alternateFormats": [
+    {
+      "uri": "ruby-rules-ja.pdf",
+      "label": "Original Japanese (PDF)"
+    }
+  ],
+  "localBiblio": {
+    "JIS4051": {
+      "title": "Formatting rules for Japanese documents (&#12302;&#26085;&#26412;&#35486;&#25991;&#26360;&#12398;&#32068;&#29256;&#26041;&#27861;&#12303;)",
+      "publisher": "Japanese Standards Association",
+      "date": "2004",
+      "id": "JIS X 4051:2004"
+    }
+  },
+  "noRecTrack": true,
+  "group": "i18n",
+  "publishISODate": "2021-05-30T00:00:00.000Z",
+  "generatedSubtitle": "Editor's Draft 30 May 2021"
+}</script>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED"></head>
+<body class="h-entry informative"><div class="head">
+    <a class="logo" href="https://www.w3.org/"><img alt="W3C" width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C"></a> <h1 id="title" class="title">Ruby and Accessibility</h1>
+    
+    <h2>
+      W3C Editor's Draft
+      <time class="dt-published" datetime="2021-05-30">30 May 2021</time>
+    </h2>
+    <dl>
+      <dt>This version:</dt><dd>
+              <a class="u-url" href="https://w3c.github.io/jlreq/docs/simple-ruby/">https://w3c.github.io/jlreq/docs/simple-ruby/</a>
+            </dd><dt>Latest published version:</dt><dd>
+              <a href="https://www.w3.org/TR/ruby-accessibility/">https://www.w3.org/TR/ruby-accessibility/</a>
+            </dd>
+      <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/jlreq/docs/simple-ruby/">https://w3c.github.io/jlreq/docs/simple-ruby/</a></dd>
+      
+      
+      <dt>Previous editor's draft:</dt><dd><a href="https://florian.rivoal.net/ruby/">https://florian.rivoal.net/ruby/</a></dd>
+      
+      
+      <dt>Editor:</dt>
+      <dd class="editor p-author h-card vcard" data-editor-id="43241">
+    <a class="u-url url p-name fn" href="https://florian.rivoal.net">Florian Rivoal</a> (<span class="p-org org h-org">Invited Expert</span>)
+  </dd>
+      
+      <dt>Author:</dt><dd class="editor p-author h-card vcard">
+    <span class="p-name fn">Toshi Kobayashi</span>
+  </dd>
+      <dt>Participate:</dt><dd>
+    <a href="https://github.com/w3c/jlreq/">GitHub w3c/jlreq</a>
+  </dd><dd>
+    <a href="https://github.com/w3c/jlreq/issues/">File an issue</a>
+  </dd><dd>
+    <a href="https://github.com/w3c/jlreq/commits/gh-pages">Commit history</a>
+  </dd><dd>
+    <a href="https://github.com/w3c/jlreq/pulls/">Pull requests</a>
+  </dd>
+    </dl>
+    
+    
+    <p>
+          This document is also available in this non-normative format:
+          <a rel="alternate" href="ruby-rules-ja.pdf">Original Japanese (PDF)</a>
+        </p>
+    <p class="copyright">
+    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+    ©
+    2021
+    
+    <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+    <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>,
+    <a href="https://ev.buaa.edu.cn/">Beihang</a>). 
+    W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a rel="license" href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules
+    apply.
+  </p>
+    <hr title="Separator for header">
+  </div>
+<section id="abstract" class="introductory"><h2>Abstract</h2>
   <p>Placeholder for information about ruby accessibility.</p>
 </section>
-<section id='sotd'>
+<section id="sotd" class="introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this
+      document at the time of its publication. Other documents may supersede
+      this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision
+      of this technical report can be found in the
+      <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at
+      https://www.w3.org/TR/.</em></p>
   <p><strong>The document Rules for Simple Placement of Japanese Ruby has been <a href="https://w3c.github.io/simple-ruby/">moved here</a>.</strong></p>
   <p><strong>The information below about accessibility was removed from that document, and is retained here until it can be extended, at which point it will be published as a separate, accessibility-specific document.</strong></p>
-</section>
-<section>
-<h2 id="ruby-and-accessibility">Ruby and Accessibility</h2>
+<p>
+    This document was published by the <a href="https://www.w3.org/International/core/">Internationalization Working Group</a> as an
+    Editor's Draft. 
+    
+  </p><p>
+    <a href="https://github.com/w3c/jlreq/issues/">GitHub Issues</a> are preferred for
+          discussion of this specification.
+        
+    
+  </p><p>
+      Publication as an Editor's Draft does not imply endorsement
+      by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. 
+    </p><p>This is a draft document and may be updated, replaced
+  or obsoleted by other documents at any time. It is inappropriate to cite this
+  document as other than work in progress.
+  </p><p></p><p>
+    
+        This document was produced by a group
+        operating under the
+        <a href="https://www.w3.org/Consortium/Patent-Policy-20170801/">1 August 2017 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+          Policy</a>.
+       The group does not expect this document to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
+    
+                <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
+                <a rel="disclosure" href="https://www.w3.org/groups/wg/i18n-core/ipr">public list of any patent disclosures</a>
+          made in connection with the deliverables of
+          the group; that page also includes
+          instructions for disclosing a patent. An individual who has actual
+          knowledge of a patent which the individual believes contains
+          <a href="https://www.w3.org/Consortium/Patent-Policy-20170801/#def-essential">Essential Claim(s)</a>
+          must disclose the information in accordance with
+          <a href="https://www.w3.org/Consortium/Patent-Policy-20170801/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+        
+    
+  </p><p>
+                  This document is governed by the
+                  <a id="w3c_process_revision" href="https://www.w3.org/2020/Process-20200915/">15 September 2020 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#ruby-and-accessibility"><bdi class="secno">1. </bdi>Ruby and Accessibility</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#accessibility-improvements-using-ruby"><bdi class="secno">1.1 </bdi>Accessibility Improvements Using Ruby</a></li><li class="tocline"><a class="tocxref" href="#ruby-display-requirements-for-accessibility"><bdi class="secno">1.2 </bdi>Ruby Display Requirements for Accessibility</a></li></ol></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
+<section id="ruby-and-accessibility-0">
+<h2 id="ruby-and-accessibility"><bdi class="secno">1. </bdi>Ruby and Accessibility<a class="self-link" aria-label="§" href="#ruby-and-accessibility"></a></h2>
 
-<section>
-<h3 id="accessibility-improvements-using-ruby">Accessibility Improvements Using Ruby</h3>
+<section id="accessibility-improvements-using-ruby-0">
+<h3 id="accessibility-improvements-using-ruby"><bdi class="secno">1.1 </bdi>Accessibility Improvements Using Ruby<a class="self-link" aria-label="§" href="#accessibility-improvements-using-ruby"></a></h3>
 
 <p>Ruby plays a role in improving accessibility for people with visual impairments,
 and other sources of reading difficulties.
@@ -69,16 +280,16 @@ For example, here are some common requirements:</p>
   <li>
     <p>To accommodate young children who cannot read any kanji,
     general-ruby must be added to all kanji.</p>
-    <aside class=note title="General-Ruby and Para-Ruby">
-      See <a href="https://www.w3.org/TR/jlreq/#choice_of_base_characters_to_be_annotated_by_ruby">JLReq section “3.2.2 Choice of Base Characters to be Annotated by Ruby”</a> for an explanation of “general-ruby” and “para-ruby”. [[JLREQ]]
-    </aside>
+    <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span><span class="issue-label">: General-Ruby and Para-Ruby</span></div><aside class="">
+      See <a href="https://www.w3.org/TR/jlreq/#choice_of_base_characters_to_be_annotated_by_ruby">JLReq section “3.2.2 Choice of Base Characters to be Annotated by Ruby”</a> for an explanation of “general-ruby” and “para-ruby”. [<cite><a class="bibref" data-link-type="biblio" href="#bib-jlreq" title="Requirements for Japanese Text Layout 日本語組版処理の要件(日本語版)">JLREQ</a></cite>]
+    </aside></div>
   </li>
   <li>
     <p>As studies progress, a greater number of kanji is known.
     After having read general-ruby many times,
     ruby on difficult kanji only becomes sufficient.
     Therefore para-ruby on only some of the kanji is required.</p>
-    <aside class=note title="The Need for Ruby">
+    <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span><span class="issue-label">: The Need for Ruby</span></div><aside class="">
       According to the results of the 2017 DAISY survey towards general users of textbooks,
       61% of children require general-ruby.
       Based on the same survey,
@@ -87,8 +298,8 @@ For example, here are some common requirements:</p>
       having ruby on difficult kanji only is found sufficient.
       Moreover, printed textbooks use para-ruby,
       and faithful digital reproduction is needed.
-    </aside>
-    <aside class=note title="Kanji Studied by Elementary and Middle School Students">
+    </aside></div>
+    <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span><span class="issue-label">: Kanji Studied by Elementary and Middle School Students</span></div><aside class="">
       Kanji to be learned during primary school are defined in
       the “Primary School Learning Guidelines”.
       Those kanji are often called “educational kanji”.
@@ -101,7 +312,7 @@ For example, here are some common requirements:</p>
       the 1110 “characters in common use” no included in educational kanji
       so as to have studied all 2136 characters in common use
       by the end of middle school.
-    </aside>
+    </aside></div>
   </li>
   <li>Some people have difficulties in visually distinguishing between
     ruby characters and the base characters to which they are attached,
@@ -114,8 +325,8 @@ For example, here are some common requirements:</p>
 </ul>
 </section>
 
-<section>
-<h3 id="ruby-display-requirements-for-accessibility">Ruby Display Requirements for Accessibility</h3>
+<section id="ruby-display-requirements-for-accessibility-0">
+<h3 id="ruby-display-requirements-for-accessibility"><bdi class="secno">1.2 </bdi>Ruby Display Requirements for Accessibility<a class="self-link" aria-label="§" href="#ruby-display-requirements-for-accessibility"></a></h3>
 
 <p>Based on the above,
 we can gather the following
@@ -138,5 +349,233 @@ ruby display requirements for accessibility:</p>
 </ol>
 </section>
 </section>
-</body>
-</html>
+
+
+<section id="references" class="appendix"><h2 id="a-references"><bdi class="secno">A. </bdi>References<a class="self-link" aria-label="§" href="#references"></a></h2><section id="informative-references">
+    <h3 id="a-1-informative-references"><bdi class="secno">A.1 </bdi>Informative references<a class="self-link" aria-label="§" href="#informative-references"></a></h3>
+    <dl class="bibliography"><dt id="bib-jlreq">[JLREQ]</dt><dd><a href="https://www.w3.org/TR/jlreq/"><cite>Requirements for Japanese Text Layout 日本語組版処理の要件(日本語版)</cite></a>. Hiroyuki Chiba; Junzaburo Edamoto; Richard Ishida; Seiichi Kato; Tatsuo KOBAYASHI; Toshi Kobayashi; Nathaniel McCully; Felix Sasaki; Atsushi Shimono; Hajime Shiozawa; Fuqiao Xue et al.  W3C. 11 August 2020. W3C Note. URL: <a href="https://www.w3.org/TR/jlreq/">https://www.w3.org/TR/jlreq/</a></dd></dl>
+  </section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><script id="respec-dfn-panel">(() => {
+// @ts-check
+if (document.respec) {
+  document.respec.ready.then(setupPanel);
+} else {
+  setupPanel();
+}
+
+function setupPanel() {
+  const listener = panelListener();
+  document.body.addEventListener("keydown", listener);
+  document.body.addEventListener("click", listener);
+}
+
+function panelListener() {
+  /** @type {HTMLElement} */
+  let panel = null;
+  return event => {
+    const { target, type } = event;
+
+    if (!(target instanceof HTMLElement)) return;
+
+    // For keys, we only care about Enter key to activate the panel
+    // otherwise it's activated via a click.
+    if (type === "keydown" && event.key !== "Enter") return;
+
+    const action = deriveAction(event);
+
+    switch (action) {
+      case "show": {
+        hidePanel(panel);
+        /** @type {HTMLElement} */
+        const dfn = target.closest("dfn, .index-term");
+        panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+        const coords = deriveCoordinates(event);
+        displayPanel(dfn, panel, coords);
+        break;
+      }
+      case "dock": {
+        panel.style.left = null;
+        panel.style.top = null;
+        panel.classList.add("docked");
+        break;
+      }
+      case "hide": {
+        hidePanel(panel);
+        panel = null;
+        break;
+      }
+    }
+  };
+}
+
+/**
+ * @param {MouseEvent|KeyboardEvent} event
+ */
+function deriveCoordinates(event) {
+  const target = /** @type HTMLElement */ (event.target);
+
+  // We prevent synthetic AT clicks from putting
+  // the dialog in a weird place. The AT events sometimes
+  // lack coordinates, so they have clientX/Y = 0
+  const rect = target.getBoundingClientRect();
+  if (
+    event instanceof MouseEvent &&
+    event.clientX >= rect.left &&
+    event.clientY >= rect.top
+  ) {
+    // The event probably happened inside the bounding rect...
+    return { x: event.clientX, y: event.clientY };
+  }
+
+  // Offset to the middle of the element
+  const x = rect.x + rect.width / 2;
+  // Placed at the bottom of the element
+  const y = rect.y + rect.height;
+  return { x, y };
+}
+
+/**
+ * @param {Event} event
+ */
+function deriveAction(event) {
+  const target = /** @type {HTMLElement} */ (event.target);
+  const hitALink = !!target.closest("a");
+  if (target.closest("dfn:not([data-cite]), .index-term")) {
+    return hitALink ? "none" : "show";
+  }
+  if (target.closest(".dfn-panel")) {
+    if (hitALink) {
+      return target.classList.contains("self-link") ? "hide" : "dock";
+    }
+    const panel = target.closest(".dfn-panel");
+    return panel.classList.contains("docked") ? "hide" : "none";
+  }
+  if (document.querySelector(".dfn-panel:not([hidden])")) {
+    return "hide";
+  }
+  return "none";
+}
+
+/**
+ * @param {HTMLElement} dfn
+ * @param {HTMLElement} panel
+ * @param {{ x: number, y: number }} clickPosition
+ */
+function displayPanel(dfn, panel, { x, y }) {
+  panel.hidden = false;
+  // distance (px) between edge of panel and the pointing triangle (caret)
+  const MARGIN = 20;
+
+  const dfnRects = dfn.getClientRects();
+  // Find the `top` offset when the `dfn` can be spread across multiple lines
+  let closestTop = 0;
+  let minDiff = Infinity;
+  for (const rect of dfnRects) {
+    const { top, bottom } = rect;
+    const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+    if (diffFromClickY < minDiff) {
+      minDiff = diffFromClickY;
+      closestTop = top;
+    }
+  }
+
+  const top = window.scrollY + closestTop + dfnRects[0].height;
+  const left = x - MARGIN;
+  panel.style.left = `${left}px`;
+  panel.style.top = `${top}px`;
+
+  // Find if the panel is flowing out of the window
+  const panelRect = panel.getBoundingClientRect();
+  const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+  if (panelRect.right > SCREEN_WIDTH) {
+    const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+    const newCaretOffset = left - newLeft;
+    panel.style.left = `${newLeft}px`;
+    /** @type {HTMLElement} */
+    const caret = panel.querySelector(".caret");
+    caret.style.left = `${newCaretOffset}px`;
+  }
+
+  // As it's a dialog, we trap focus.
+  // TODO: when <dialog> becomes a implemented, we should really
+  // use that.
+  trapFocus(panel, dfn);
+}
+
+/**
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function trapFocus(panel, dfn) {
+  /** @type NodeListOf<HTMLAnchorElement> elements */
+  const anchors = panel.querySelectorAll("a[href]");
+  // No need to trap focus
+  if (!anchors.length) return;
+
+  // Move focus to first anchor element
+  const first = anchors.item(0);
+  first.focus();
+
+  const trapListener = createTrapListener(anchors, panel, dfn);
+  panel.addEventListener("keydown", trapListener);
+
+  // Hiding the panel releases the trap
+  const mo = new MutationObserver(records => {
+    const [record] = records;
+    const target = /** @type HTMLElement */ (record.target);
+    if (target.hidden) {
+      panel.removeEventListener("keydown", trapListener);
+      mo.disconnect();
+    }
+  });
+  mo.observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+}
+
+/**
+ *
+ * @param {NodeListOf<HTMLAnchorElement>} anchors
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function createTrapListener(anchors, panel, dfn) {
+  const lastIndex = anchors.length - 1;
+  let currentIndex = 0;
+  return event => {
+    switch (event.key) {
+      // Hitting "Tab" traps us in a nice loop around elements.
+      case "Tab": {
+        event.preventDefault();
+        currentIndex += event.shiftKey ? -1 : +1;
+        if (currentIndex < 0) {
+          currentIndex = lastIndex;
+        } else if (currentIndex > lastIndex) {
+          currentIndex = 0;
+        }
+        anchors.item(currentIndex).focus();
+        break;
+      }
+
+      // Hitting "Enter" on an anchor releases the trap.
+      case "Enter":
+        hidePanel(panel);
+        break;
+
+      // Hitting "Escape" returns focus to dfn.
+      case "Escape":
+        hidePanel(panel);
+        dfn.focus();
+        return;
+    }
+  };
+}
+
+/** @param {HTMLElement} panel */
+function hidePanel(panel) {
+  if (!panel) return;
+  panel.hidden = true;
+  panel.classList.remove("docked");
+}
+})()</script><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
