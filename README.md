@@ -1,4 +1,4 @@
-# Japanese Text Layout task force (jlreq) （JLReq 日本語組版タスクフォース）
+# This is a test repo
 
 This group allows a network of experts to share information about gaps and requirements for support of Japanese on the Web and in eBooks. 
 
